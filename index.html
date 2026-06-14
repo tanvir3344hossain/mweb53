@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Tanvir Worlds | Heritage Mangoes from Our Garden</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FFFBF0;
+            color: #2E241F;
+            scroll-behavior: smooth;
+        }
+
+        /* mango-inspired warm tones */
+        :root {
+            --mango: #F59E0B;
+            --mango-dark: #EA580C;
+            --leaf: #4C7A34;
+            --cream: #FFF9EF;
+            --shadow: 0 20px 35px -12px rgba(0,0,0,0.08);
+            --radius-card: 2rem;
+        }
+
+        /* navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 6%;
+            background: rgba(255, 251, 240, 0.96);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #FFE2B5;
+        }
+
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #D97706, #F59E0B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo p {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #B45309;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #D97706;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #5C3A1E;
+            transition: 0.2s;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #EA580C;
+            border-bottom-color: #F59E0B;
+        }
+
+        /* cover section with farmer pic */
+        .hero-cover {
+            background: linear-gradient(120deg, #FFF1DF, #FFE6C7);
+            padding: 3rem 6% 2.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 2rem;
+        }
+        .hero-text {
+            flex: 1.2;
+        }
+        .hero-text .badge {
+            background: #FDE68A;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #92400E;
+            margin-bottom: 1rem;
+        }
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #7B341E;
+            line-height: 1.2;
+        }
+        .hero-text p {
+            font-size: 1rem;
+            color: #4A2E1B;
+            margin: 1rem 0;
+            max-width: 500px;
+        }
+        .stats {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .stat {
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .hero-image {
+            flex: 0.8;
+            text-align: center;
+        }
+        .hero-image img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: var(--shadow);
+        }
+        .hero-caption {
+            margin-top: 0.7rem;
+            font-weight: 600;
+            color: #92400E;
+        }
+
+        /* sections */
+        section {
+            padding: 4rem 6%;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            text-align: center;
+            color: #B45309;
+            margin-bottom: 2rem;
+        }
+        .section-title span {
+            background: #FEF3C7;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* fruit cards with price */
+        .fruit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+        .fruit-card {
+            background: white;
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #FFE2B5;
+        }
+        .fruit-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 32px rgba(0,0,0,0.1);
+        }
+        .fruit-img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            background: #FFEACB;
+        }
+        .fruit-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .fruit-info h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #C2410C;
+        }
+        .fruit-sub {
+            font-size: 0.75rem;
+            color: #B45309;
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+        }
+        .price {
+            background: #FEF9E6;
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #2B6E2F;
+            margin: 0.5rem 0;
+        }
+        .order-btn-card {
+            background: #25D366;
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+        /* about, heritage, corporate */
+        .farmer-heritage-wrap {
+            background: #FFF6EA;
+            border-radius: 3rem;
+            padding: 2rem;
+            margin: 0 6%;
+        }
+        .about-farmer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .farmer-details {
+            flex: 1;
+        }
+        .farmer-details h3 {
+            font-size: 1.9rem;
+            font-family: 'Playfair Display', serif;
+            color: #A55217;
+        }
+        .info-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+        .heritage-steps {
+            flex: 1;
+            background: #FFFFFFD9;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+        }
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-number {
+            background: #F59E0B;
+            width: 30px;
+            height: 30px;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+        }
+        .corporate-pack {
+            background: #FDE68A;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        /* gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item {
+            height: 200px;
+            border-radius: 1.5rem;
+            background-size: cover;
+            background-position: center;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        /* CONTACT SECTION - exactly as the screenshot style: clean card, WhatsApp, order info */
+        .contact-special {
+            background: #FFFFFF;
+            border-radius: 2.5rem;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid #FFE2B5;
+        }
+        .contact-special h2 {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            color: #B45309;
+            margin-bottom: 0.5rem;
+        }
+        .contact-special .highlight {
+            background: #FEF3C7;
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .whatsapp-card {
+            background: #25D366;
+            margin: 1.5rem 0;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 800;
+            font-size: 1.3rem;
+            transition: 0.2s;
+            box-shadow: 0 5px 12px rgba(37,211,102,0.3);
+        }
+        .whatsapp-card i {
+            font-size: 1.8rem;
+        }
+        .whatsapp-card:hover {
+            background: #128C7E;
+            transform: scale(1.02);
+        }
+        .contact-footer {
+            margin-top: 1.5rem;
+            border-top: 1px dashed #FFDDB7;
+            padding-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: #5C3A1E;
+        }
+        footer {
+            background: #F2E0C9;
+            text-align: center;
+            padding: 1.8rem;
+            color: #5C3A1E;
+        }
+
+        @media (max-width: 800px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 75px;
+                left: -100%;
+                background: #FFF9EF;
+                width: 70%;
+                height: 100vh;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 2rem;
+                gap: 2rem;
+                transition: 0.3s;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+                z-index: 998;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            .hero-image img {
+                width: 130px;
+                height: 130px;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .contact-special h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <h1>🥭 TANVIR WORLDS</h1>
+        <p>heritage mangoes • own orchard</p>
+    </div>
+    <button class="hamburger" id="hamburgerBtn"><i class="fas fa-bars"></i></button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#fruits" class="nav-link">Fruits</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#heritage" class="nav-link">Heritage</a></li>
+    </ul>
+</nav>
+
+<!-- Cover Section with Tanvir's photo -->
+<section id="home" class="hero-cover">
+    <div class="hero-text">
+        <div class="badge"><i class="fas fa-leaf"></i> 100% Garden-fresh • 0 Chemicals</div>
+        <h1>Straight from <br> our family garden</h1>
+        <p>Tanvir Hossain — CSE, Daffodil Int’l University — brings you the pure taste of our ancestral mango orchard. No middlemen, just love and heritage.</p>
+        <div class="stats">
+            <div class="stat"><i class="fas fa-tree"></i> 35+ yrs heritage</div>
+            <div class="stat"><i class="fas fa-truck"></i> 24h harvest to ship</div>
+            <div class="stat"><i class="fas fa-hand-holding-heart"></i> Direct from farmer</div>
+        </div>
+    </div>
+    <div class="hero-image">
+        <img id="ownerPhoto" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Tanvir Hossain">
+        <div class="hero-caption"><i class="fas fa-user-check"></i> Tanvir Hossain (Founder)</div>
+        <div style="font-size:0.7rem; background:#FFE2B5; border-radius:30px; display:inline-block; padding:3px 12px; margin-top:8px;">🍃 আমের নিজস্ব বাগান</div>
+    </div>
+</section>
+
+<!-- Fruits with price -->
+<section id="fruits">
+    <div class="section-title"><span>🌿 king of mangoes 🌿</span><br>Our Premium Mangoes</div>
+    <div class="fruit-grid" id="fruitGrid"></div>
+</section>
+
+<!-- About + Heritage + Corporate Package together -->
+<section id="about">
+    <div class="farmer-heritage-wrap">
+        <div class="about-farmer">
+            <div class="farmer-details">
+                <h3>🍋 Meet Tanvir Hossain</h3>
+                <p style="margin-top:0.6rem; line-height:1.5;">I’m Tanvir Hossain, a CSE student at Daffodil International University. What started as looking after my family’s mango garden during summer has grown into <strong>Tanvir Worlds</strong> — a small-batch, direct-from-farm brand. Every fruit you order is grown, harvested, and packed by people I know personally. No middlemen, no carbide ripening — just the mangoes I grew up eating.</p>
+                <div class="info-card">
+                    <p><i class="fas fa-graduation-cap"></i> <strong>Daffodil International University – CSE Dept.</strong></p>
+                    <p><i class="fas fa-tractor"></i> <strong>Source:</strong> Family Garden (Nijosso bagan)</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Rajshahi & Chapai Nawabganj</p>
+                </div>
+            </div>
+            <div class="heritage-steps" id="heritage">
+                <h3><i class="fas fa-history"></i> Our Heritage</h3>
+                <div class="step"><div class="step-number">1</div><div><strong>The first tree</strong><br>My grandfather planted Himsagar saplings on our village land.</div></div>
+                <div class="step"><div class="step-number">2</div><div><strong>A real orchard</strong><br>My father expanded with Langra & Fazli, traditional chemical-free methods.</div></div>
+                <div class="step"><div class="step-number">3</div><div><strong>Tanvir Worlds</strong><br>I brought the garden online so families across Bangladesh can taste our legacy.</div></div>
+            </div>
+        </div>
+        <div class="corporate-pack">
+            <i class="fas fa-briefcase fa-2x"></i>
+            <h3>📦 Corporate Package & Bulk Orders</h3>
+            <p>Exclusive corporate gift boxes, premium export quality, customized branding, and festive bulk offers. Special pricing for 20kg+ orders / corporate clients.</p>
+            <a href="https://wa.me/8801763685251?text=Hi%20Tanvir%20Worlds,%20I%20need%20corporate%20mango%20package%20details." style="background:#F59E0B; display:inline-block; margin-top:12px; padding:8px 22px; border-radius:40px; color:white; text-decoration:none; font-weight:bold;">Get Corporate Quote →</a>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section id="gallery">
+    <div class="section-title"><span>📸 visual feast</span><br>Mango Moments</div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<!-- CONTACT section – exactly as the screenshot style: WhatsApp, delivery, Founder info -->
+<section id="contact">
+    <div class="contact-special">
+        <div class="highlight"><i class="fab fa-whatsapp"></i> Order korar jonno WhatsApp korun</div>
+        <h2>🍑 Sara Bangladesh-e delivery</h2>
+        <p style="margin: 0.8rem 0;">Just message me on WhatsApp with your variety and quantity.</p>
+        <hr style="width: 60px; margin: 1rem auto; border: 1px solid #FFD7A3;">
+        <div style="font-weight: 600; font-size: 1rem;">GET IN TOUCH</div>
+        <div style="background: #F1F5F9; border-radius: 2rem; padding: 0.8rem; margin: 1rem auto; display: inline-block; min-width: 220px;">
+            <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i> 
+            <span style="font-weight: 800; font-size: 1.3rem;">WHATSAPP</span>
+        </div>
+        <div style="font-size: 2rem; font-weight: 800; letter-spacing: 2px; color: #2C3E2F;">01763-685251</div>
+        <a href="https://wa.me/8801763685251?text=Hello%20Tanvir%20Worlds,%20I%20want%20to%20order%20fresh%20mangoes!" class="whatsapp-card" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+        <div class="contact-footer">
+            <span><i class="fas fa-user-graduate"></i> Founder: Tanvir Hossain</span>
+            <span><i class="fas fa-laptop-code"></i> Student, CSE — Daffodil International University</span>
+        </div>
+        <p style="margin-top: 1rem; font-size: 0.75rem;"><i class="fas fa-tree"></i> "আমাদের নিজস্ব বাগান থেকে সরাসরি”</p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Tanvir Worlds — Heritage Mangoes | From our family garden to your table.</p>
+    <p>Tanvir Hossain | CSE, Daffodil International University | 🇧🇩</p>
+</footer>
+
+<script>
+    // Mango product array with price (as requested)
+    const mangoList = [
+        { name: "Himsagar", subtitle: "KING OF MANGOES", price: "2200 TK / 12kg", desc: "Buttery sweet, fiberless flesh with intense aroma.", img: "https://images.pexels.com/photos/1092758/mango-farm-trees-orchard-1092758.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { name: "Langra", subtitle: "CLASSIC HERITAGE", price: "1900 TK / 12kg", desc: "Tangy-sweet balance, deep yellow pulp, juicy bite.", img: "https://images.pexels.com/photos/3274914/mango-fruit-tropical-sweet-3274914.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { name: "Amrapali", subtitle: "LATE SEASON", price: "2400 TK / 12kg", desc: "Deep orange, candy-sweet, perfect for desserts.", img: "https://images.pexels.com/photos/1092795/mango-fruit-ripe-tropical-1092795.jpeg?auto=compress&cs=tinysrgb&w=600" },
+        { name: "Fazli", subtitle: "GIANT OF BENGAL", price: "1700 TK / 12kg", desc: "Big, fleshy, mildly sweet — great for shakes & jam.", img: "https://images.pexels.com/photos/1402627/mango-nature-fruit-sweet-1402627.jpeg?auto=compress&cs=tinysrgb&w=600" }
+    ];
+
+    const galleryImages = [
+        "https://images.pexels.com/photos/1072556/mango-fruit-sweet-ripe-1072556.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/2069592/fresh-mango-fruit-with-leaves-2069592.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/1092787/close-up-photo-of-ripe-mangoes-1092787.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/2324846/mango-trees-orchard-farm-2324846.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/587741/mango-fruit-summer-tropical-587741.jpeg?auto=compress&cs=tinysrgb&w=600",
+        "https://images.pexels.com/photos/1460870/mango-fruit-sweet-fruit-1460870.jpeg?auto=compress&cs=tinysrgb&w=600"
+    ];
+
+    function renderFruits() {
+        const container = document.getElementById("fruitGrid");
+        if(!container) return;
+        container.innerHTML = "";
+        mangoList.forEach(m => {
+            const card = document.createElement("div");
+            card.className = "fruit-card";
+            card.innerHTML = `
+                <img class="fruit-img" src="${m.img}" alt="${m.name}" loading="lazy">
+                <div class="fruit-info">
+                    <div class="fruit-sub">${m.subtitle}</div>
+                    <h3>${m.name}</h3>
+                    <div class="price">${m.price}</div>
+                    <p style="font-size: 0.85rem; margin-bottom: 1rem;">${m.desc}</p>
+                    <button class="order-btn-card" data-fruit="${m.name}"><i class="fab fa-whatsapp"></i> Order via WhatsApp</button>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        document.querySelectorAll('.order-btn-card').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const fruit = btn.getAttribute('data-fruit');
+                const msg = `Hi Tanvir Worlds, I want to order ${fruit} (fresh from your garden). Please share price & delivery details.`;
+                window.open(`https://wa.me/8801763685251?text=${encodeURIComponent(msg)}`, '_blank');
+            });
+        });
+    }
+
+    function renderGallery() {
+        const galleryGrid = document.getElementById("galleryGrid");
+        if(!galleryGrid) return;
+        galleryGrid.innerHTML = "";
+        galleryImages.forEach(img => {
+            const div = document.createElement("div");
+            div.className = "gallery-item";
+            div.style.backgroundImage = `url('${img}')`;
+            galleryGrid.appendChild(div);
+        });
+    }
+
+    const ownerImg = document.getElementById("ownerPhoto");
+    if(ownerImg) ownerImg.src = "https://randomuser.me/api/portraits/men/45.jpg";
+
+    // hamburger logic
+    const hamburger = document.getElementById("hamburgerBtn");
+    const navLinksEl = document.getElementById("navLinks");
+    if(hamburger && navLinksEl) {
+        hamburger.addEventListener("click", () => navLinksEl.classList.toggle("active"));
+        document.querySelectorAll(".nav-link").forEach(link => {
+            link.addEventListener("click", () => navLinksEl.classList.remove("active"));
+        });
+    }
+
+    // smooth scroll and active highlight
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if(targetId === "#" || !targetId) return;
+            const target = document.querySelector(targetId);
+            if(target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if(navLinksEl) navLinksEl.classList.remove("active");
+            }
+        });
+    });
+
+    const sections = document.querySelectorAll("section, #home, #about, #fruits, #gallery, #contact, #heritage");
+    const navItems = document.querySelectorAll(".nav-link");
+    window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach(sec => {
+            const top = sec.offsetTop - 140;
+            const height = sec.offsetHeight;
+            if(window.scrollY >= top && window.scrollY < top + height) {
+                current = sec.getAttribute("id");
+            }
+        });
+        navItems.forEach(link => {
+            link.classList.remove("active");
+            if(link.getAttribute("href") === `#${current}`) link.classList.add("active");
+        });
+    });
+
+    renderFruits();
+    renderGallery();
+</script>
+</body>
+</html>
